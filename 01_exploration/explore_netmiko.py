@@ -73,8 +73,9 @@ def main():
     print("#"*50)
     print("Inspecting Signatures")
     print("#"*50)
-    inspect.signature(BaseConnection.send_command)
-    inspect.signature(BaseConnection.send_config_set)
+    print(inspect.signature(BaseConnection.send_command))
+    print()
+    print(inspect.signature(BaseConnection.send_config_set))
 
     
     # TODO 5: Exception discovery
