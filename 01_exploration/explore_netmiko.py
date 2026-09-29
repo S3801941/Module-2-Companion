@@ -11,6 +11,7 @@ TODO: Complete the functions below to master object exploration
 import netmiko
 from netmiko import ConnectHandler
 import inspect
+from netmiko.base_connection import BaseConnection
 
 def main():
     """
@@ -28,7 +29,7 @@ def main():
         'password': 'yL_5IoMsQh7-66x'
     }
 
-    connection = ConnectHandler(**device)
+    connection = ConnectHandler(**device) 
 
     print("#"*50)
     print("All Methods")
@@ -40,8 +41,7 @@ def main():
     print("Private Methods")
     print("#"*50)
 
-    method = [m for m in dir(ConnectHandler) if '_' in m]
-    print (method)
+    print (dir('_'))
     print()
 
 
@@ -51,7 +51,7 @@ def main():
     print("#"*50)
     print("Getting Help")
     print("#"*50)
-    help(ConnectHandler.send_command)
+    help(BaseConnection.send_command)
     print()
 
 
@@ -61,7 +61,7 @@ def main():
     print("#"*50)
     print("Methods with Send")
     print("#"*50)
-    method = [m for m in dir(ConnectHandler) if 'send' in m]
+    method = [m for m in dir(BaseConnection) if 'send' in m]
     print (method)
     print()
 
@@ -73,8 +73,8 @@ def main():
     print("#"*50)
     print("Inspecting Signatures")
     print("#"*50)
-    inspect.signature(ConnectHandler.send_command)
-    inspect.signature(ConnectHandler.send_config_set)
+    inspect.signature(BaseConnection.send_command)
+    inspect.signature(BaseConnection.send_config_set)
 
     
     # TODO 5: Exception discovery
