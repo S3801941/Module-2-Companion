@@ -26,9 +26,9 @@ cd Module-2-Companion
 python -m venv netmiko-env
 
 # Activate virtual environment
-# Windows:
+# Windows - Without using containers:
 netmiko-env\Scripts\activate
-# macOS/Linux:
+# macOS/Linux - While in container:
 source netmiko-env/bin/activate
 
 # Install dependencies
