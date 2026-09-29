@@ -8,7 +8,7 @@ netmiko>=4.3.0
 ntc-templates>=5.0.0
 
 # Enhanced pretty printing for better output formatting
-pprint2>=0.1.0
+# pprint2>=0.1.0
 
 # Regular expressions (built-in, but good to note)
 # re - Built-in Python module for pattern matching
