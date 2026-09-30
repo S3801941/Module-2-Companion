@@ -52,6 +52,7 @@ def main():
     print("Getting Help")
     print("#"*50)
     help(BaseConnection.send_command)
+    print("Got Help!")
     print()
 
 
