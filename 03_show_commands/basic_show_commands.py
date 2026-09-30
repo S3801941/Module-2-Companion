@@ -59,7 +59,7 @@ def main():
 
         output = connection.send_command(command)
         print(output)
-        print(f"\nRaw length: {len(output)} characters\n")
+        print(f"Raw length: {len(output)} characters\n")
 
     # TODO 3: Analyze the raw output structure  
     # Count how many lines each command produces
@@ -78,11 +78,11 @@ def main():
     # From 'show version' - find the hostname
     # From 'show ip interface brief' - find interfaces that are 'up'
     # See how difficult this is with raw text!
-
+    
     # TODO 5: Save raw output to text files
     # Save each command output to a separate file
     # Open the files in a text editor to see the formatting
-
+    
     print("Raw output analysis complete!")
 
 if __name__ == "__main__":
