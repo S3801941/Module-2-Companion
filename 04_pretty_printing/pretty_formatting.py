@@ -51,10 +51,6 @@ def main():
     # Save the messy raw output to compare later
     
     output = connection.send_command('show version')
-    print(f"\n{'='*50}")
-    print("Raw 'show version' output:")
-    print('='*50)
-
     print(repr(output))
 
     # TODO 3: Create basic formatting functions
@@ -63,23 +59,61 @@ def main():
     
     print(f"\n{'='*50}")
     print("Formatted 'show version' output:")
-    print('='*50)
+    print('='*50)    
 
-    pprint(output)
+    output_lines = output.splitlines()
+    for line in output_lines:
+        print(f"| {line:<46} |")
+    print('='*50)
 
     # TODO 4: Practice with structured data
     # Create a dictionary with device information
     # Use pprint() to format it nicely
     
+    device_info = {
+        'hostname': host,
+        'username': username,
+        'device_type': device['device_type'],
+        'os_version': output_lines[0] if output_lines else "Unknown",
+        'uptime': output_lines[1] if len(output_lines) > 1 else "Unknown"
+    }
+    print(f"\n{'='*50}")
+    print("\nDevice Information:")
+    print('='*50)
+    pprint(device_info)
+    print('='*50)
+
     # TODO 5: Format interface data as a table
     # Take 'show ip interface brief' output
     # Try to make it look like a clean table
     
+    output = connection.send_command('show ip interface brief')
+
+    print(f"\n{'='*50}")
+    print("\nFormatted 'show ip interface brief' output:")
+    print('='*50)
+    print(f"|{'Interface':<20} | {'IP-Address':<20} | {'OK?':<5} | {'Method':<10} | {'Status':<20} | {'Protocol':<10} |")
+    print('-'*110)
+    output_lines = output.splitlines()
+    for line in output_lines[1:]:  # Skip the header line
+        parts = line.split()
+        if len(parts) >= 6:
+            interface, ip_address, ok, method, status, protocol = parts[:6]
+            print(f"| {interface:<20} | {ip_address:<20} | {ok:<5} | {method:<10} | {status:<20} | {protocol:<10} |")
+    print('='*50)
+
     # TODO 6: Compare before and after
     # Show the raw output next to your formatted version
     # See the difference good formatting makes!
     
-    print("Formatting practice complete!")
+    raw_output = connection.send_command('show ip interface brief')
+    print(f"\n{'='*50}")
+    print("\nRaw 'show ip interface brief' output:")
+    print('='*50)
+    print(raw_output)
 
+    print(f"\nFormatting practice complete!")
+
+    connection.disconnect()
 if __name__ == "__main__":
     main()
