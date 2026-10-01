@@ -12,15 +12,61 @@ def main():
     
     # TODO 1: Import pprint module
     # You'll need: from pprint import pprint
+    import netmiko
+    from netmiko import ConnectHandler
+    import getpass
+    from pprint import pprint
     
+    print("#"*50)
+    print("Getting Connection Details")
+    print("#"*50)
+    host = input("Hostname/IP: ")
+    username = input("Username: ")
+    password = getpass.getpass("Password: ")
+    
+    device = {
+        'device_type': 'cisco_ios',
+        'host': host,
+        'username': username,
+        'password': password
+    }
+    
+    print("#"*50)
+    print(f"Attempting to connect to {host}.")
+    print("#"*50)
+    
+    try:
+        connection = ConnectHandler(**device)
+        print("Connected!")
+        print()
+    except ConnectionError:
+        print(f"An Error has occured when Attempting to connect to {host}.")
+        connection.disconnect()
+    except:
+        print("An Unknown Exception Happened")
+        connection.disconnect()
+
     # TODO 2: Get some raw command output
     # Connect to your device and get 'show version' output
     # Save the messy raw output to compare later
     
+    output = connection.send_command('show version')
+    print(f"\n{'='*50}")
+    print("Raw 'show version' output:")
+    print('='*50)
+
+    print(repr(output))
+
     # TODO 3: Create basic formatting functions
     # Make a function that adds headers and separators
     # Make the output look professional with borders
     
+    print(f"\n{'='*50}")
+    print("Formatted 'show version' output:")
+    print('='*50)
+
+    pprint(output)
+
     # TODO 4: Practice with structured data
     # Create a dictionary with device information
     # Use pprint() to format it nicely

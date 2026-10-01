@@ -16,7 +16,9 @@ Raw network device output is functional but ugly. Professional automation requir
 
 Compare these two outputs - which would you rather read in a report?
 
-**Raw output:** `GigabitEthernet0/0     192.168.1.1     YES NVRAM  up                    up      \nGigabitEthernet0/1     unassigned      YES NVRAM  administratively down down    `
+**Raw output:**
+
+`GigabitEthernet0/0     192.168.1.1     YES NVRAM  up                    up      \nGigabitEthernet0/1     unassigned      YES NVRAM  administratively down down    `
 
 **Formatted output:**
 
