@@ -1,0 +1,17 @@
+Configuration changes made on devnetsandboxiosxec8k.cisco.com at 20261001_175059
+==================================================
+Configuration Commands Applied:
+interface 20
+ip address 10.10.10.20 255.255.255.255
+description Interface created with User Input
+no shutdown
+==================================================
+Verification Output:
+Building configuration...
+
+Current configuration : 109 bytes
+!
+interface Loopback10
+ description Configured by Python Script
+ ip address 10.10.10.10 255.255.255.255
+end
