@@ -72,18 +72,54 @@ def main():
         last_line = output.splitlines()[-1]
         print(f"Last line: {last_line}\n") # Outputting the last line
         print(repr(output))
-        print()
         
     # TODO 4: Try to extract specific information
     # From 'show version' - find the hostname
     # From 'show ip interface brief' - find interfaces that are 'up'
     # See how difficult this is with raw text!
-    
+        
+        print(f"\n{'='*50}")
+        print(f"Finding specific information in: {command}")
+        print('='*50)
+
+        if 'show version' in command:
+            show_version_output = connection.send_command('show version')
+            hostname_line = [line for line in show_version_output.splitlines() if 'hostname' in line]
+            if hostname_line:
+                print(f"Hostname found: {hostname_line[0]}")
+            else:
+                print("Hostname not found in 'show version' output.")
+
+        if 'show ip interface brief' in command:
+            show_ip_interface_brief_output = connection.send_command('show ip interface brief')
+            up_interfaces = [line for line in show_ip_interface_brief_output.splitlines() if 'up' in line]
+            if up_interfaces:
+                print("Interfaces that are up:")
+                for interface in up_interfaces:
+                    print(f"  {interface}")
+            else:
+                    print("No interfaces found that are up.")
+
+        if 'show clock' in command:
+            show_clock_output = connection.send_command('show clock')
+            print(f"Current system clock: {show_clock_output.strip()}")
+            print("Tick tock, the clock is running!")
+        
     # TODO 5: Save raw output to text files
     # Save each command output to a separate file
     # Open the files in a text editor to see the formatting
-    
-    print("Raw output analysis complete!")
+
+        print(f"\n{'='*50}")
+        print(f"Saving raw output to text file for: {command}")
+        print('='*50)
+
+        with open(f"Command Output Files/{command.replace(' ', '_')}_output.txt", 'w') as f:
+            f.write(output)
+
+        print(f"Raw output for '{command}' saved to 'Command Output Files/{command.replace(' ', '_')}_output.txt'")
+
+    connection.disconnect()
+    print("\nRaw output analysis complete!")
 
 if __name__ == "__main__":
     main()
