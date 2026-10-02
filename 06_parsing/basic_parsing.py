@@ -100,8 +100,6 @@ def main():
     else:
         print("Parsed data is empty or not in expected format.")
     print(f"{'='*50}\n")
-
-
     
     # TODO 5: Parse interface data
     # Get 'show ip interface brief' output
@@ -117,11 +115,19 @@ def main():
     print(f"\n{'='*50}")
     print("Parsed Interface Data")
     print('='*50)
+    pprint(parsed_interfaces)
+    print(f"{'='*50}\n")
+    
+    print(f"\n{'='*50}")
+    print("Structured Parsed Interface Data")
+    print('='*50)
     if parsed_interfaces:
         for interface in parsed_interfaces:
-            name = interface.get('intf', 'N/A')
+            name = interface.get('interface', 'N/A')
+            ip_address = interface.get('ip_address', 'N/A')
+            protocol = interface.get('proto', 'N/A')
             status = interface.get('status', 'N/A')
-            print(f"Interface: {name}, Status: {status}")
+            print(f"Interface: {name}, IP Address: {ip_address}, Protocol: {protocol} Status: {status}")
     else:
         print("Parsed interface data is empty or not in expected format.")
 
@@ -137,13 +143,18 @@ def main():
     parsed_routes = parse_output(platform='cisco_ios', command=ip_route_command, data=ip_route_output)
     print(f"\n{'='*50}")
     print("Parsed IP Route Data")
+    print('='*50)    
+    pprint(parsed_routes)
+    print(f"\n{'='*50}")
+    print("Structured Parsed IP Route Data")
     print('='*50)
     if parsed_routes:
         for route in parsed_routes:
-            prefix = route.get('prefix', 'N/A')
+            network = route.get('network', 'N/A')
+            prefix = route.get('prefix_length', 'N/A')
             protocol = route.get('protocol', 'N/A')
-            next_hop = route.get('nexthop', 'N/A')
-            print(f"Route: {prefix}, Protocol: {protocol}, Next Hop: {next_hop}")
+            next_hop = route.get('nexthop_if', 'N/A')
+            print(f"Route: {network}/{prefix}, Protocol: {protocol}, Next Hop: {next_hop}")
         print(f"{'='*50}\n")
     else:
         print("Parsed route data is empty or not in expected format.")
